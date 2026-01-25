@@ -1,0 +1,17 @@
+# Dot env configuration
+.env
+
+# Pycharm
+.idea/
+
+# VS code
+.vscode/
+
+# shakemake
+.shakemake/
+
+# venv
+venv
+
+# git
+.git/
