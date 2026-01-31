@@ -1,5 +1,2 @@
-outs:
-- md5: 82a70dcdc6f9cd2a3b33874411e6d33d
-  size: 1283080
-  hash: md5
-  path: train_filled.csv
+{outs: [{path: train_filled.csv, md5: 82a70dcdc6f9cd2a3b33874411e6d33d, size: 1283080,
+hash: md5}]}

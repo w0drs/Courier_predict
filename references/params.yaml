@@ -1,0 +1,38 @@
+# КОЛОНКИ ДЛЯ ЗАПОЛНЕНИЯ ПРОПУСКОВ
+nan_filling:
+  numeric_cols:
+    - "fact_staff_value_lag_1"
+    - "fact_load_factor_lag_1"
+    - "num_available_couriers_lag_1"
+    - "fact_num_orders_lag_1"
+    - "fact_percent_lateness_lag_1"
+    - "store_lifetime_in_days"
+    - "fact_staff_churn"
+    - "marketing_costs_lag_1"
+    - "fact_couriers_with_shifts_lag_1"
+  flag_cols:
+    - "flag_high_load_lag_1"
+  cat_cols:
+    - "city_nm"
+
+# КОЛОНКИ ДЛЯ УДАЛЕНИЯ
+drop_features:
+  cols:
+    - "calendar_dt"
+    - "store_id"
+    - "calendar_dt_facts"
+
+# ПАРАМЕТРЫ МЕРЖА ДАННЫХ
+merge_data:
+  test_date: "2025-11-24"
+  save_stats: true
+
+# ПАРАМЕТРЫ ГЕНЕРАЦИИ ФИЧ
+build_features:
+  target_col: "target"
+  prediction_gap_cols:
+    - "staff_prediction_gap"
+    - "orders_prediction_gap"
+  productivity_cols:
+    - "past_productivity"
+    - "predicted_productivity"

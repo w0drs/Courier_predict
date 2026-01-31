@@ -1,0 +1,54 @@
+stages:
+  merge-data:
+    cmd: python src/data/merge_data.py data/raw/facts.csv data/raw/shifts_prediction.csv data/raw/train.csv data/raw/test.csv data/interim/train_merged.csv data/interim/test_merged.csv
+    deps:
+      - data/raw/facts.csv
+      - data/raw/shifts_prediction.csv
+      - data/raw/train.csv
+      - data/raw/test.csv
+      - src/data/merge_data.py
+    outs:
+      - data/interim/train_merged.csv:
+          cache: true
+      - data/interim/test_merged.csv:
+          cache: true
+
+  fill-nan:
+    cmd: python src/data/nan_filling.py data/interim/train_merged.csv data/interim/test_merged.csv data/interim/train_filled.csv data/interim/test_filled.csv models/nan_filler.joblib models/nan_filler_new.joblib references/params.yaml
+    deps:
+      - data/interim/train_merged.csv
+      - data/interim/test_merged.csv
+      - src/data/nan_filling.py
+      - references/params.yaml
+    outs:
+      - data/interim/train_filled.csv:
+          cache: true
+      - data/interim/test_filled.csv:
+          cache: true
+      - models/nan_filler_new.joblib:
+          cache: true
+
+  build-features:
+    cmd: python src/features/build_features.py data/interim/train_filled.csv data/interim/test_filled.csv data/interim/train_features.csv data/interim/test_features.csv
+    deps:
+      - src/features/build_features.py
+      - data/interim/train_filled.csv
+      - data/interim/test_filled.csv
+    outs:
+      - data/interim/train_features.csv:
+          cache: true
+      - data/interim/test_features.csv:
+          cache: true
+
+  drop-features:
+    cmd: python src/data/drop_features.py data/interim/train_features.csv data/interim/test_features.csv data/processed/train_final.csv data/processed/test_final.csv references/params.yaml
+    deps:
+      - data/interim/train_features.csv
+      - data/interim/test_features.csv
+      - src/data/drop_features.py
+      - references/params.yaml
+    outs:
+      - data/processed/train_final.csv:
+          cache: true
+      - data/processed/test_final.csv:
+          cache: true

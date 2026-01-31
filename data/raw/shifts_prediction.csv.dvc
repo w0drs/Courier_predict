@@ -1,5 +1,0 @@
-outs:
-- md5: ed985d2b7189bae3959d74fab8a00740
-  size: 13140660
-  hash: md5
-  path: shifts_prediction.csv

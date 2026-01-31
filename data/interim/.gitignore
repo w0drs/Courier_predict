@@ -1,6 +1,11 @@
 /merged_test.csv
 /merged_train.csv
-/test_filled.csv
 /test_processed.csv
 /train_processed.csv
+/train_merged.csv
+/test_merged.csv
 /train_filled.csv
+/test_filled.csv
+/train_features.csv
+/test_features.csv
+.zip
