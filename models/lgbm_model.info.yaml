@@ -1,0 +1,29 @@
+data:
+  categorical_features:
+  - city_nm
+  shape:
+  - 8219
+  - 18
+  source: data/processed/train_final.csv
+  target: target
+metrics:
+  target_mean: 2.3772965080910087
+  target_std: 2.7360790268252617
+model:
+  params:
+    bagging_fraction: 0.8
+    bagging_freq: 5
+    feature_fraction: 0.9
+    learning_rate: 0.1
+    max_depth: 8
+    metric: rmse
+    min_child_samples: 20
+    n_estimators: 1000
+    num_leaves: 255
+    objective: regression
+    random_state: 42
+    reg_lambda: 3.0
+    verbose: -1
+  type: LightGBM
+training:
+  timestamp: '2026-02-03T22:12:52.778654'
