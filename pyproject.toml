@@ -1,31 +1,30 @@
 [tool.poetry]
 name = "courierpredict"
 version = "0.1.0"
-description = ""
-authors = ["Golik.D. <>"]
+description = "ML project for courier prediction"
+authors = ["Golik.D."]
 readme = "README.md"
-requires-python = ">=3.14"
-package-mode = false
+packages = [{include = "src", from = "."}]
 
 [tool.poetry.dependencies]
-python = "^3.14,<4"
-dvc = {extras = ["gdrive"], version = ">=3.66.1,<4.0.0"}
-black = "23.12.1"
-click = ">=8.3.1,<9.0.0"
-joblib = ">=1.5.3,<2.0.0"
-lightgbm = ">=4.6.0,<5.0.0"
-pandas = ">=2.0,<3.0"
-numpy = ">=2.0.0"
-pyarrow = ">=10,<23"
-mlflow = ">=3.9.0,<4.0.0"
-graphql-core = ">=3.2.3,<3.3"
-graphene = ">=3.0,<4.0"
-pytest = ">=9.0.2,<10.0.0"
+python = "^3.12,<4"
+dvc = {extras = ["gdrive"], version = "^3.66.1"}
+black = "^23.12.1"
+click = "^8.3.1"
+joblib = "^1.5.3"
+lightgbm = "^4.6.0"
+pandas = "^2.0"
+numpy = "^2.0.0"
+pyarrow = "^10"
+mlflow = "^2.9.1"
+graphql-core = "^3.2.3"
+graphene = "^3.2.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.2"
+pytest-cov = "^4.1.0"
+flake8 = "^6.0.0"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.black]
-line-length = 88
-target-version = ['py314']
