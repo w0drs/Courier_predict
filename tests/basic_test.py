@@ -15,7 +15,7 @@ def test_import():
         print(f"Import error: {e}")
         assert False
 
+
 if __name__ == "__main__":
     test_import()
     print("Tests passed")
-

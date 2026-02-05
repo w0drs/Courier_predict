@@ -15,6 +15,7 @@ project_root = Path(__file__).parent.parent.parent
 mlflow_path = project_root / "mlruns"
 db_path = project_root / "mlflow.db"
 
+
 def run_baseline_experiment():
     """Запуск baseline эксперимента"""
     print("Начало эксперимента")
@@ -129,6 +130,7 @@ def run_baseline_experiment():
         })
 
         print("Эксперимент проведен успешно!")
+
 
 if __name__ == "__main__":
     run_baseline_experiment()

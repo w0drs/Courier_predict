@@ -1,6 +1,7 @@
 import click
 import pandas as pd
 
+
 @click.command()
 @click.argument('facts_filepath', type=click.Path(exists=True))
 @click.argument('shifts_filepath', type=click.Path(exists=True))
@@ -89,9 +90,9 @@ def merge_data(facts_filepath,
         if test_output:
             test_merged.to_csv(test_output, index=False)
 
+
 if __name__ == "__main__":
     merge_data()
-
 
 
 

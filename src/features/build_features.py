@@ -1,6 +1,7 @@
 import pandas as pd
 import click
 
+
 @click.command()
 @click.argument('train_filepath', type=click.Path(exists=True))
 @click.argument('test_filepath', type=click.Path())
@@ -51,6 +52,7 @@ def build_features(train_filepath,
 
         if test_output_path:
             test_df.to_csv(test_output_path, index=False)
+
 
 if __name__ == "__main__":
     build_features()

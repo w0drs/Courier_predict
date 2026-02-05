@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 class NanFiller:
     """
     Класс для заполнения пропущенных значений в данных о курьерах.
@@ -41,6 +42,7 @@ class NanFiller:
         Returns:
             self: Обученный объект NanFiller
         """
+
         if nan_cols is None: nan_cols = []
         if flag_cols is None: flag_cols = []
         if cat_cols is None: cat_cols = []
@@ -116,5 +118,6 @@ class NanFiller:
         Returns:
             DataFrame с заполненными пропусками
         """
+
         self.fit(df, nan_cols, flag_cols, cat_cols)
         return self.transform(df)

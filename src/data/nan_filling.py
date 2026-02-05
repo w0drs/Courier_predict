@@ -67,5 +67,6 @@ def fill_nan(train_filepath,
         if test_output_path:
             test_filled.to_csv(test_output_path, index=False)
 
+
 if __name__ == "__main__":
     fill_nan()

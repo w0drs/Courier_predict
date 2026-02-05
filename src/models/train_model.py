@@ -28,7 +28,6 @@ def train_lgbm_model(dataset_path, model_output_path, config_path):
     target_col = config.get('target_col', 'target')
     cat_features = config.get('categorical_features', [])
 
-
     # Загрузка данных
     df = pd.read_csv(dataset_path)
 
@@ -75,6 +74,7 @@ def train_lgbm_model(dataset_path, model_output_path, config_path):
     print(f"Модель сохранена: {model_output_path}")
     print(f"Информация о модели: {info_path}")
     print(f"Среднее целевой переменной: {y.mean():.2f}")
+
 
 def _get_model_info(model_params,
                     dataset_path,

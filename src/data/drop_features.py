@@ -20,7 +20,7 @@ def drop_features(train_filepath,
            test_filepath: path to test data
            train_output_path: the path where train data will be saved
            test_output_path: the path where test data will be saved
-           params_file: path to yaml file with parameters for this function (columns to drop)
+           params_file: path to yaml file with parameters for this function
        The final train and test data will be saved in csv files.
     """
     with open(params_file, 'r', encoding='utf-8') as f:
@@ -39,6 +39,7 @@ def drop_features(train_filepath,
         test_df.drop(columns=drop_cols, inplace=True)
         if test_output_path:
             test_df.to_csv(test_output_path, index=False)
+
 
 if __name__ == "__main__":
     drop_features()

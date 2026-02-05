@@ -1,7 +1,6 @@
 import pandas as pd
 import click
 import joblib
-import numpy as np
 
 
 @click.command()
