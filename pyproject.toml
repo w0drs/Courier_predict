@@ -10,16 +10,23 @@ requires-python = ">=3.14"
 dependencies = [
     "dvc[gdrive] (>=3.66.1,<4.0.0)",
     "black (==23.12.1)",
-    "cryptography (<42)",
-    "pyopenssl (==23.2.0)",
     "poetry-core (>=2.3.0,<3.0.0) ; python_version < \"4.0\"",
     "click (>=8.3.1,<9.0.0)",
-    "pandas (>=3.0.0,<4.0.0)",
     "joblib (>=1.5.3,<2.0.0)",
-    "lightgbm (>=4.6.0,<5.0.0)"
+    "lightgbm (>=4.6.0,<5.0.0)",
+    "pandas (>=2.0,<3.0)",
+    "numpy (>=2.0.0)",
+    "pyarrow (>=10,<23)",
+    "mlflow (>=3.9.0,<4.0.0)",
+    "graphql-core (>=3.2.3,<3.3)",
+    "graphene (>=3.0,<4.0)",
+    "pytest (>=9.0.2,<10.0.0)",
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.14,<4"
