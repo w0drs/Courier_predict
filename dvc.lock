@@ -1,0 +1,127 @@
+schema: '2.0'
+stages:
+  merge-data:
+    cmd: python src/data/merge_data.py data/raw/facts.csv 
+      data/raw/shifts_prediction.csv data/raw/train.csv data/raw/test.csv 
+      data/interim/train_merged.csv data/interim/test_merged.csv
+    deps:
+    - path: data/raw/facts.csv
+      hash: md5
+      md5: f8fb88cc4e333964f4d31f11cbd346f4
+      size: 1338076
+    - path: data/raw/shifts_prediction.csv
+      hash: md5
+      md5: ed985d2b7189bae3959d74fab8a00740
+      size: 13140660
+    - path: data/raw/test.csv
+      hash: md5
+      md5: ee97284c68715b481ec389b6942a0395
+      size: 90215
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 8221c7fdc4be65caff312df2b156cb8c
+      size: 427672
+    - path: src/data/merge_data.py
+      hash: md5
+      md5: 28ae1c3e3034b2f2ea56da1795131f0e
+      size: 3386
+    outs:
+    - path: data/interim/test_merged.csv
+      hash: md5
+      md5: 0fa509cd02f6df281117cd5d5709d810
+      size: 371874
+    - path: data/interim/train_merged.csv
+      hash: md5
+      md5: 851c781db77e03cee5bdd4b4de75f566
+      size: 1146195
+  fill-nan:
+    cmd: python src/data/nan_filling.py data/interim/train_merged.csv 
+      data/interim/test_merged.csv data/interim/train_filled.csv 
+      data/interim/test_filled.csv models/nan_filler.joblib 
+      models/nan_filler_new.joblib references/params.yaml
+    deps:
+    - path: data/interim/test_merged.csv
+      hash: md5
+      md5: 0fa509cd02f6df281117cd5d5709d810
+      size: 371874
+    - path: data/interim/train_merged.csv
+      hash: md5
+      md5: 851c781db77e03cee5bdd4b4de75f566
+      size: 1146195
+    - path: references/params.yaml
+      hash: md5
+      md5: 16281b1520d5f2fac55136734ecf5b22
+      size: 968
+    - path: src/data/nan_filling.py
+      hash: md5
+      md5: 7891494b0d5065b2ffa023f70a154125
+      size: 2932
+    outs:
+    - path: data/interim/test_filled.csv
+      hash: md5
+      md5: dfa8e23d2b4a9f1964d72decfcdbab28
+      size: 384023
+    - path: data/interim/train_filled.csv
+      hash: md5
+      md5: 82a70dcdc6f9cd2a3b33874411e6d33d
+      size: 1283080
+    - path: models/nan_filler_new.joblib
+      hash: md5
+      md5: a19d69ee349b8d6104337f5e27ace037
+      size: 685
+  build-features:
+    cmd: python src/features/build_features.py data/interim/train_filled.csv 
+      data/interim/test_filled.csv data/interim/train_features.csv 
+      data/interim/test_features.csv
+    deps:
+    - path: data/interim/test_filled.csv
+      hash: md5
+      md5: dfa8e23d2b4a9f1964d72decfcdbab28
+      size: 384023
+    - path: data/interim/train_filled.csv
+      hash: md5
+      md5: 82a70dcdc6f9cd2a3b33874411e6d33d
+      size: 1283080
+    - path: src/features/build_features.py
+      hash: md5
+      md5: a1cdc1ca768ff31308099ef86d3063c2
+      size: 2859
+    outs:
+    - path: data/interim/test_features.csv
+      hash: md5
+      md5: 194fcb271a2d65b26e3fd50d71c0b1a2
+      size: 457900
+    - path: data/interim/train_features.csv
+      hash: md5
+      md5: 875d1ee0279813ade0b65f74dccf00d2
+      size: 1521663
+  drop-features:
+    cmd: python src/data/drop_features.py data/interim/train_features.csv 
+      data/interim/test_features.csv data/processed/train_final.csv 
+      data/processed/test_final.csv references/params.yaml
+    deps:
+    - path: data/interim/test_features.csv
+      hash: md5
+      md5: 194fcb271a2d65b26e3fd50d71c0b1a2
+      size: 457900
+    - path: data/interim/train_features.csv
+      hash: md5
+      md5: 875d1ee0279813ade0b65f74dccf00d2
+      size: 1521663
+    - path: references/params.yaml
+      hash: md5
+      md5: 16281b1520d5f2fac55136734ecf5b22
+      size: 968
+    - path: src/data/drop_features.py
+      hash: md5
+      md5: a6dae0d23e15a76d9cf05fd5d0c5fd01
+      size: 1600
+    outs:
+    - path: data/processed/test_final.csv
+      hash: md5
+      md5: ab5907283def6378eea4dc551199430e
+      size: 313669
+    - path: data/processed/train_final.csv
+      hash: md5
+      md5: 333240dcefbe7caeb8d285522bd7d4fd
+      size: 1060285
