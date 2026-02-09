@@ -1,11 +1,12 @@
 import pandas as pd
 import click
 import yaml
+from pathlib import Path
 
 
 @click.command()
 @click.argument('train_filepath', type=click.Path(exists=True))
-@click.argument('test_filepath', type=click.Path(exists=True))
+@click.argument('test_filepath', type=click.Path())
 @click.argument('train_output_path', type=click.Path())
 @click.argument('test_output_path', type=click.Path())
 @click.argument('params_file', type=click.Path())
@@ -34,7 +35,7 @@ def drop_features(train_filepath,
     if train_output_path:
         train_df.to_csv(train_output_path, index=False)
 
-    if test_filepath:
+    if test_filepath and Path(test_filepath).exists():
         test_df = pd.read_csv(test_filepath)
         test_df.drop(columns=drop_cols, inplace=True)
         if test_output_path:

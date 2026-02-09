@@ -1,4 +1,3 @@
-# для теста ранера ci
 def test_import():
     """Тест импорта основных библиотек."""
     try:
@@ -8,7 +7,6 @@ def test_import():
         import lightgbm as lgb
         import yaml
 
-        # Если импорт прошел успешно
         assert True
 
     except ImportError as e:
