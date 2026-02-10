@@ -10,6 +10,7 @@ CourierPredict
 
 ## Структура проекта
 --------
+    **CourierPredict**
     ├── LICENSE
     ├── Makefile
     ├── README.md 
