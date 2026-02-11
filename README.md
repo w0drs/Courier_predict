@@ -150,45 +150,29 @@ git checkout <commit>
 dvc checkout
 ```
 
-## Обучение модели
+### Эксперименты и логирование (MLflow)
 ```bash
-python src/models/train_model.py data/processed/train_filled.csv models/model.joblib configs/params.yaml
-```
-
-### Предсказание
-```bash
-python src/models/predict_model.py models/model.joblib data/processed/test_filled.csv predictions/predictions.csv
-```
-
-### Эксперименты MlFlow
-```bash
-# Запуск эксперимента
+# Запустить эксперимент
 python src/experiments/baseline_experiment.py
 
+# Запустить эксперимент с подбранными параметрами
+python src/experiments/lgbm_with_params_experiment.py
+
 # Просмотр результатов
-mlflow ui
+mlflow ui  # http://localhost:5000
 ```
 
-### Тестирование data pipline и train model 
+Логируется:
+- Параметры модели
+- Инфрмация о датасете  
+- WAPE, RMSE, MAE  
+
+## Тестирование
 ```bash
 # Запуск всех тестов
 pytest tests/
 
 # Конкретный модуль
 pytest tests/test_nan_filler.py -v
-```
-
-## Установка
-
-```bash
-# Клонирование репозитория
-git clone https://github.com/w0drs/Courier_predict.git
-cd CourierPredict
-
-# Установка зависимостей через Poetry
-poetry install
-
-# Активация виртуального окружения
-poetry shell
 ```
 
