@@ -150,7 +150,7 @@ git checkout <commit>
 dvc checkout
 ```
 
-### Эксперименты и логирование (MLflow)
+## Эксперименты и логирование (MLflow)
 ```bash
 # Запустить эксперимент
 python src/experiments/baseline_experiment.py
