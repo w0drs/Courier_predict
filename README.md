@@ -112,22 +112,6 @@ WAPE = Σ|y_true - y_pred| / Σ|y_true|
 - Категориальные признаки заполняются 'пусто'.  
 
 
-
-## Установка
-
-```bash
-# Клонирование репозитория
-git clone https://github.com/w0drs/Courier_predict.git
-cd CourierPredict
-
-# Установка зависимостей через Poetry
-poetry install
-
-# Активация виртуального окружения
-poetry shell
-```
-
-
 ## Воспроизводимость с DVC
 ### Почему DVC?
 Проект использует DVC (Data Version Control) для версионирования данных и воспроизводимости экспериментов.  
@@ -166,7 +150,7 @@ git checkout <commit>
 dvc checkout
 ```
 
-### Обучение модели
+## Обучение модели
 ```bash
 python src/models/train_model.py data/processed/train_filled.csv models/model.joblib configs/params.yaml
 ```
@@ -185,15 +169,26 @@ python src/experiments/baseline_experiment.py
 mlflow ui
 ```
 
-### Тестирование
+### Тестирование data pipline и train model 
 ```bash
 # Запуск всех тестов
 pytest tests/
 
-# С покрытием кода
-pytest tests/ --cov=src/
-
 # Конкретный модуль
 pytest tests/test_nan_filler.py -v
+```
+
+## Установка
+
+```bash
+# Клонирование репозитория
+git clone https://github.com/w0drs/Courier_predict.git
+cd CourierPredict
+
+# Установка зависимостей через Poetry
+poetry install
+
+# Активация виртуального окружения
+poetry shell
 ```
 
