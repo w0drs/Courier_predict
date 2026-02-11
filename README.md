@@ -72,8 +72,17 @@ WAPE = Σ|y_true - y_pred| / Σ|y_true|
 Преимущества WAPE для этой задачи:
 - Устойчива к выбросам  
 - Интерпретируема  
-- Не занижает ошибку при малых значениях (в отличие от MAPE)  \
+- Не занижает ошибку при малых значениях (в отличие от MAPE)
 
+### Модель 
+Для задачи прогнозирования дефицита курьеров был выбран LightGBM по трем причинам:
+- Скорость - обучение в 2-3 раза быстрее XGBoost  
+- Категориальные признаки - нативная поддержка без one-hot encoding  
+- Память - нужно меньше RAM, чем у аналогов
+
+Результат: WAPE = 0.63 при обучении за ~20 секунд - оптимальный баланс качества и скорости.  
+
+### Результаты различных моделей  
 | Модель | WAPE | Комментарий |
 |--------|------|-------------|
 | Базовое предсказание (среднее) | 0.9 | Прогноз средним значением |  
@@ -119,17 +128,42 @@ poetry shell
 ```
 
 
-## Использование
-### Подготовка данных
+## Воспроизводимость с DVC
+### Почему DVC?
+Проект использует DVC (Data Version Control) для версионирования данных и воспроизводимости экспериментов.  
+Каждый этап обработки зафиксирован в пайплайне, что гарантирует:  
+- Воспроизводимость - любой запуск дает тот же результат
+- Версионирование данных - данные привязаны к коммитам
+- Параллельные эксперименты - легкое переключение между версиями
+
+### Пайплайн обработки данных  
 ```bash
-# Объединение данных
-python src/data/merge_data.py data/raw/facts.csv data/raw/shifts.csv data/raw/train.csv data/raw/test.csv data/interim/train_merged.csv data/interim/test_merged.csv
+# Воспроизвести весь пайплайн
+dvc repro
 
-# Удаление лишних признаков
-python src/data/drop_features.py data/interim/train_merged.csv data/interim/test_merged.csv data/processed/train.csv data/processed/test.csv configs/params.yaml
+# Визуализировать пайплайн
+dvc dag
+```
 
-# Заполнение пропусков
-python src/data/nan_filling.py data/processed/train.csv data/processed/test.csv data/processed/train_filled.csv data/processed/test_filled.csv models/filler.joblib models/filler.joblib configs/params.yaml
+### Этапы пайплайна  
+| Этап | Входные данные | Выходные данные | Описание |
+|------|----------------|-----------------|----------|
+| merge-data | facts, shifts, train, test | train_merged, test_merged | Объединение данных за разные недели |  
+| fill-nan | train_merged, test_merged | train_filled, test_filled, nan_filler | Заполнение пропусков (кастомный NanFiller) |  
+| build-features | train_filled, test_filled | train_features, test_features | Генерация признаков (лаги, скользящие средние) |  
+| drop-features | train_features, test_features | train_final, test_final | Удаление неинформативных признаков |   
+
+### Версионирование данных
+```bash
+# Скачать данные из хранилища (gdrive хранилище)
+dvc pull
+
+# Посмотреть различия в данных
+dvc diff
+
+# Переключиться на другую версию данных
+git checkout <commit>
+dvc checkout
 ```
 
 ### Обучение модели
