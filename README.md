@@ -169,7 +169,7 @@ mlflow ui  # http://localhost:5000
 Логируется:
 - Параметры модели
 - Инфрмация о датасете  
-- WAPE, RMSE, MAE  
+- WAPE, Loss 
 
 ## Тестирование
 ```bash
